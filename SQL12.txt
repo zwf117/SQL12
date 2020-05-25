@@ -1,0 +1,89 @@
+信息系统与数据库技术练习12答题卡
+
+班级：     19信息管理1班
+姓名：     祝晚芳
+学号：     20190307117
+
+注：请将答案放置在序号下方。*/
+
+（一）
+1.
+USE PROJECT
+
+
+2.
+CREATE VIEW V_EP
+AS
+SELECT Employee.Eid,Ename,Project.Pid,Pname,Wages
+FROM Employee JOIN EP JOIN Project
+ON Project.Pid=EP.Pid
+ON Employee.Eid=EP.Eid
+
+
+3.
+SELECT * FROM V_EP
+
+
+
+4.
+SELECT Eid,Ename,Pname,Wages
+FROM V_EP
+WHERE Pname IN('1#','3#','5#')
+
+
+5.
+CREATE VIEW V_Pay
+AS
+SELECT Eid,Ename,Esex,BasePay+Bonus AS TotalPay,BasePay+Bonus-Insurance AS RealPay
+FROM Employee
+
+
+6.
+SELECT * FROM V_Pay 
+
+7.
+CREATE VIEW v_emp
+AS
+SELECT Department.Dname,Employee.*
+FROM Department JOIN Employee
+ON Department.Did=Employee.Did
+
+8.
+SELECT *
+FROM v_emp
+WHERE Dname='财务部'
+
+9.
+EXEC Sp_depends v_emp
+
+10.
+EXEC Sp_helptext v_emp
+
+
+11.
+ALTER VIEW V_emp
+WITH ENCRYPTION
+AS
+SELECT Department.Dname,Employee.*
+FROM Department JOIN Employee
+ON Department.Did=Employee.Did
+
+12.
+EXEC Sp_helptext v_emp
+
+13.
+DROP VIEW v_emp
+
+
+14.
+SELECT Did,Dname,Project.*
+FROM Department CROSS JOIN Project
+WHERE Dname='财务部'AND Pname LIKE '%2%'
+
+
+
+15.
+SELECT B.*
+FROM Employee A JOIN Employee B
+ON A.Did=B.Did
+WHERE A.Ename='陈燕玲'
